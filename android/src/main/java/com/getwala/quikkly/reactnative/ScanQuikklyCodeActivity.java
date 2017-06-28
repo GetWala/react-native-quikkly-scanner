@@ -9,13 +9,13 @@ import android.util.Log;
 import net.quikkly.android.ui.ScanActivity;
 import net.quikkly.core.ScanResult;
 
-import static Quikkly.Reactnative.Constants.QUIKKLY_SCANNED_CODE;
+import static com.getwala.quikkly.reactnative.Constants.QUIKKLY_SCANNED_CODE;
 
 /**
  * Created by jmaleonard on 6/26/17.
  */
 
-public class ScanQuicklyCodeActivity extends ScanActivity {
+public class ScanQuikklyCodeActivity extends ScanActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
