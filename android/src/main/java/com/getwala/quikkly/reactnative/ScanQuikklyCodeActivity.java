@@ -31,7 +31,7 @@ public class ScanQuikklyCodeActivity extends ScanActivity {
             for(Tag scannedCode : result.tags) {
                 Log.i("quikkly", "Code:" + scannedCode.getData());
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra(QUIKKLY_SCANNED_CODE, scannedCode.getData());
+                resultIntent.putExtra(QUIKKLY_SCANNED_CODE, scannedCode.getData().toString());
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
             }
