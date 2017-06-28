@@ -60,7 +60,7 @@ public class ReactNativeQuikklyScannerModule extends ReactContextBaseJavaModule 
     }
 
     @ReactMethod
-    public void scanQuikklyCode(Boolean overlay ,final Promise promise) {
+    public void scanQuikklyCode(final Promise promise) {
         Activity currentActivity = getCurrentActivity();
         if (currentActivity == null) {
             promise.reject(E_ACTIVITY_DOES_NOT_EXIST, E_ACTIVITY_DOES_NOT_EXIST);
@@ -69,9 +69,6 @@ public class ReactNativeQuikklyScannerModule extends ReactContextBaseJavaModule 
         quikklyPromise = promise;
         try {
             final Intent intent = new Intent(currentActivity, ScanQuikklyCodeActivity.class);
-            if(overlay == true){
-                intent.putExtra(EXTRA_SHOW_OVERLAY, true);
-            }
             currentActivity.startActivityForResult(intent, SCAN_QUIKKLY_CODE_REQUEST_CODE);
         } catch (Exception e) {
             quikklyPromise.reject(E_FAILED_TO_START_ACTIVITY, e.getMessage());
