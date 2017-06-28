@@ -15,7 +15,7 @@
     "QRcode"
   ],
   "author": "Jared Leonard",
-  "license" : "BSD-3-Clause",
+  "license" : "None",
   "peerDependencies": {
     "react-native": "^0.41.2"
   },
