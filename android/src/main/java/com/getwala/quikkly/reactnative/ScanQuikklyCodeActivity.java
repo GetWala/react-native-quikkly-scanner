@@ -8,6 +8,7 @@ import android.util.Log;
 
 import net.quikkly.android.ui.ScanActivity;
 import net.quikkly.core.ScanResult;
+import net.quikkly.core.Tag;
 
 import static com.getwala.quikkly.reactnative.Constants.QUIKKLY_SCANNED_CODE;
 
@@ -25,10 +26,16 @@ public class ScanQuikklyCodeActivity extends ScanActivity {
 
     @Override
     public void onScanResult(@Nullable ScanResult result){
-        Log.e(" ScanResult ", String.valueOf(result.tags[0].getData()));
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra(QUIKKLY_SCANNED_CODE, result.tags[0].getData());
-        setResult(Activity.RESULT_OK, resultIntent);
-        finish();
+        if(result != null && result.isEmpty() == false) {
+            Log.i("quikkly", "found " + result.tags.length + " codes");
+            for(Tag scannedCode : result.tags) {
+                Log.i("quikkly", "Code:" + scannedCode.getData());
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(QUIKKLY_SCANNED_CODE, scannedCode.getData());
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }
+        }
+
     }
 }
