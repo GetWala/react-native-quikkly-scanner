@@ -1,10 +1,9 @@
-
 {
   "name": "react-native-quikkly-scanner",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React-Native bridge for quikkly scanner - Android Only",
   "main": "index.js",
-  "url": "https://quikklycodes.com/", 
+  "url": "https://quikklycodes.com/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,7 +14,7 @@
     "QRcode"
   ],
   "author": "Jared Leonard",
-  "license" : "None",
+  "license": "None",
   "peerDependencies": {
     "react-native": "^0.41.2"
   },
