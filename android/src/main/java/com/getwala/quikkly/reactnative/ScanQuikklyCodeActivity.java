@@ -27,9 +27,7 @@ public class ScanQuikklyCodeActivity extends ScanActivity {
     @Override
     public void onScanResult(@Nullable ScanResult result){
         if(result != null && result.isEmpty() == false) {
-            Log.i("quikkly", "found " + result.tags.length + " codes");
             for(Tag scannedCode : result.tags) {
-                Log.i("quikkly", "Code:" + scannedCode.getData());
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra(QUIKKLY_SCANNED_CODE, scannedCode.getData().toString());
                 setResult(Activity.RESULT_OK, resultIntent);

@@ -29,6 +29,8 @@ public class ReactNativeQuikklyScannerModule extends ReactContextBaseJavaModule 
 
     private String QUIKKLY_API_KEY;
 
+    public static final String EXTRA_SHOW_OVERLAY = "show_overlay";
+
     public ReactNativeQuikklyScannerModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
@@ -36,7 +38,6 @@ public class ReactNativeQuikklyScannerModule extends ReactContextBaseJavaModule 
         try {
             ManifestMetadata metadata = ManifestMetadata.get(reactContext);
             QUIKKLY_API_KEY = metadata.getValue("QUIKKLY_API_KEY");
-            Log.d("QUIKKLY_API_KEY", QUIKKLY_API_KEY);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -59,7 +60,7 @@ public class ReactNativeQuikklyScannerModule extends ReactContextBaseJavaModule 
     }
 
     @ReactMethod
-    public void scanQuikklyCode(final Promise promise) {
+    public void scanQuikklyCode(Boolean overlay ,final Promise promise) {
         Activity currentActivity = getCurrentActivity();
         if (currentActivity == null) {
             promise.reject(E_ACTIVITY_DOES_NOT_EXIST, E_ACTIVITY_DOES_NOT_EXIST);
@@ -68,9 +69,11 @@ public class ReactNativeQuikklyScannerModule extends ReactContextBaseJavaModule 
         quikklyPromise = promise;
         try {
             final Intent intent = new Intent(currentActivity, ScanQuikklyCodeActivity.class);
+            if(overlay == true){
+                intent.putExtra(EXTRA_SHOW_OVERLAY, true);
+            }
             currentActivity.startActivityForResult(intent, SCAN_QUIKKLY_CODE_REQUEST_CODE);
         } catch (Exception e) {
-            Log.e("Error", e.getMessage());
             quikklyPromise.reject(E_FAILED_TO_START_ACTIVITY, e.getMessage());
             quikklyPromise = null;
         }
@@ -78,7 +81,6 @@ public class ReactNativeQuikklyScannerModule extends ReactContextBaseJavaModule 
 
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-        Log.d("GOT HERE", String.valueOf(requestCode));
         if (requestCode == SCAN_QUIKKLY_CODE_REQUEST_CODE) {
             if (quikklyPromise != null) {
                 if (resultCode == Activity.RESULT_CANCELED) {
