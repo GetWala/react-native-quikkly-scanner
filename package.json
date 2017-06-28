@@ -1,8 +1,8 @@
 
 {
   "name": "react-native-quikkly-scanner",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "React-Native bridge for quikkly scanner - Android Only",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,11 +10,9 @@
   "keywords": [
     "react-native"
   ],
-  "author": "",
+  "author": "Jared Leonard",
   "license": "",
   "peerDependencies": {
     "react-native": "^0.41.2",
-    "react-native-windows": "0.41.0-rc.1"
-
   }
 }
