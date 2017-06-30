@@ -28,7 +28,7 @@ android {
 
 repositories {
     mavenCentral()
-            maven { url 'http://developers.quikkly.io/nexus/repository/maven-releases/' }
+    maven { url 'http://developers.quikkly.io/nexus/repository/maven-releases/' }
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
@@ -37,11 +37,17 @@ repositories {
 }
 
 dependencies {
-    compile('net.quikkly.android:quikklycore-lib:1.2.0@aar') {
+    compile('net.quikkly.android:quikklycore-lib:1.2.1@aar') {
         transitive = true
     }
-    compile 'net.quikkly.android:quikkly-lib:1.2.0@aar'
+    compile 'net.quikkly.android:quikkly-lib:1.2.1@aar'
     compile 'com.github.onehilltech:android-metadata:1.5.2'
     compile "com.facebook.react:react-native:+"
+    compile 'com.caverock:androidsvg:1.2.1'
+    compile 'commons-io:commons-io:2.5'
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:support-v13:23.2.0'
+    compile 'com.android.support:design:23.2.0'
+    compile 'com.android.support:support-vector-drawable:23.2.0'
 }
   
