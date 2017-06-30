@@ -18,6 +18,9 @@
   "peerDependencies": {
     "react-native": "^0.41.2"
   },
+  "dependencies": {
+    "react-native": "^0.44.2"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/GetWala/react-native-quikkly-scanner"

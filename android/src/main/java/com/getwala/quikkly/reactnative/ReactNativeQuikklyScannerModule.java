@@ -4,6 +4,7 @@ package com.getwala.quikkly.reactnative;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.util.Log;
 
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.ReadableMap;
 import com.onehilltech.metadata.ManifestMetadata;
 
 import static com.getwala.quikkly.reactnative.Constants.*;
@@ -76,6 +78,31 @@ public class ReactNativeQuikklyScannerModule extends ReactContextBaseJavaModule 
         }
     }
 
+    @ReactMethod
+    public void GenerateCode(ReadableMap quikklyData, final Promise promise){
+        Activity currentActivity = getCurrentActivity();
+        if (currentActivity == null) {
+            promise.reject(E_ACTIVITY_DOES_NOT_EXIST, E_ACTIVITY_DOES_NOT_EXIST);
+            return;
+        }
+        quikklyPromise = promise;
+        try{
+            final Intent intent = new Intent(currentActivity, GenerateQuikklyCodeActivity.class);
+            intent.putExtra(TEMPLATE_NAME, quikklyData.getString(TEMPLATE_NAME));
+            intent.putExtra(QUIKKLY_DATA_CODE, quikklyData.getString(QUIKKLY_DATA_CODE));
+            intent.putExtra(BACKGROUND_COLOR, quikklyData.getString(BACKGROUND_COLOR));
+            intent.putExtra(BORDER_COLOR, quikklyData.getString(BORDER_COLOR));
+            intent.putExtra(DATA_COLOR, quikklyData.getString(DATA_COLOR));
+            intent.putExtra(MASK_COLOR, quikklyData.getString(MASK_COLOR));
+            intent.putExtra(OVERLAY_COLOR, quikklyData.getString(OVERLAY_COLOR));
+            intent.putExtra(IMAGE_PATH, quikklyData.getString(IMAGE_PATH));
+            currentActivity.startActivityForResult(intent, GENERATE_QUIKKLY_SCANNABLE);
+        }catch (Exception e){
+            quikklyPromise.reject(E_FAILED_TO_START_ACTIVITY, e.getMessage());
+            quikklyPromise = null;
+        }
+    }
+
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         if (requestCode == SCAN_QUIKKLY_CODE_REQUEST_CODE) {
@@ -92,6 +119,10 @@ public class ReactNativeQuikklyScannerModule extends ReactContextBaseJavaModule 
                         }
                     }
                 }
+            }
+        } else if (requestCode == GENERATE_QUIKKLY_SCANNABLE){
+            if(resultCode == Activity.RESULT_CANCELED || resultCode == Activity.RESULT_OK){
+                quikklyPromise.resolve(null);
             }
         }
     }
