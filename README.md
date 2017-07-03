@@ -18,23 +18,23 @@
   - Add `import com.getwala.quikkly.reactnative.ReactNativeQuikklyScannerPackage;` to the imports at the top of the file
   - Add `new ReactNativeQuikklyScannerPackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
-  	```
+  	``` groovy
   	include ':react-native-react-native-quikkly-scanner'
   	project(':react-native-react-native-quikkly-scanner').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-react-native-quikkly-scanner/android')
   	```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-	```
+	``` javascript
 		compile project(':react-native-react-native-quikkly-scanner')
 	```
 4. Add your quikkly api key to your appManifest
-	```
+	``` xml
         <meta-data
             android:name="QUIKKLY_API_KEY"
             android:value="mySuperSecretLongKey" />
 
 	```
 5. Add the ScanQuikklyCode Activity to your manifest
-	```
+	``` xml
      <activity android:name="com.getwala.quikkly.reactnative.ScanQuikklyCodeActivity"></activity>
 
 	 <activity android:name="com.getwala.quikkly.reactnative.GenerateQuikklyCodeActivity"></activity>
