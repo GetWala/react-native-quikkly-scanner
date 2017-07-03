@@ -79,7 +79,7 @@ public class ReactNativeQuikklyScannerModule extends ReactContextBaseJavaModule 
     }
 
     @ReactMethod
-    public void GenerateCode(ReadableMap quikklyData, final Promise promise){
+    public void generateCode(ReadableMap quikklyData, final Promise promise){
         Activity currentActivity = getCurrentActivity();
         if (currentActivity == null) {
             promise.reject(E_ACTIVITY_DOES_NOT_EXIST, E_ACTIVITY_DOES_NOT_EXIST);

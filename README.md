@@ -41,6 +41,7 @@
 	```
 ## Usage
 
+# Scanning
 ```   javascript
 import ReactNativeQuikklyScanner from 'react-native-quikkly-scanner';
 
@@ -50,5 +51,33 @@ import ReactNativeQuikklyScanner from 'react-native-quikkly-scanner';
     }).catch((error) => {
      //handle error here
     });
+
 ```
-  
+
+# Generating 
+ The imagePath needs to be a path on the device where the image is stored, I would recommend using react-native-cached-image'
+
+``` javascript
+
+import CachedImage from 'react-native-cached-image';
+const ImageCacheProvider = CachedImage.ImageCacheProvider;
+
+ ImageCacheProvider.getCachedImagePath(options.imagePath, {})
+    .then(imagePath => {
+      options.imagePath = imagePath;
+      ReactNativeQuikklyScanner.GenerateCode(options);
+    })
+
+options = {
+	"templateName" : "", //string defaults to "template0002style5"
+	"quikklyCode" : "", // string. This is what the scannable will return when scanned
+	"backgroundColor":"", // will default to "#5cb7a6"
+	"borderColor":"", // defaults to "#ffffff"
+	"dataColor":"", // defaults to #000000"
+	"maskColor":"", // defaults to "#5cb7a6"
+	"overlayColor":"", // defaults to // "#ffffff"
+	"imagePath": "" // defaults to "https://s3-eu-west-1.amazonaws.com/qkly-service-albums/temp_icons/squiddy.png"
+}
+
+
+```  
