@@ -35,8 +35,9 @@
 	```
 5. Add the ScanQuikklyCode Activity to your manifest
 	```
-     <activity 
-	 android:name="com.getwala.quikkly.reactnative.ScanQuikklyCodeActivity"></activity>
+     <activity android:name="com.getwala.quikkly.reactnative.ScanQuikklyCodeActivity"></activity>
+
+	 <activity android:name="com.getwala.quikkly.reactnative.GenerateQuikklyCodeActivity"></activity>
   
 	```
 ## Usage
