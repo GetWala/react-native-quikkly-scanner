@@ -1,6 +1,6 @@
 {
   "name": "react-native-quikkly-scanner",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React-Native bridge for quikkly scanner - Android Only",
   "main": "index.js",
   "url": "https://quikklycodes.com/",
