@@ -3,32 +3,33 @@ package com.getwala.quikkly.reactnative;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-
+import android.view.MotionEvent;
 import net.quikkly.android.Quikkly;
 import net.quikkly.android.ui.RenderTagView;
 import net.quikkly.core.Skin;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.net.URL;
 
-import org.apache.commons.io.IOUtils;
-import static com.getwala.quikkly.reactnative.Constants.*;
-
-import static com.getwala.quikkly.reactnative.R.id.image;
+import static com.getwala.quikkly.reactnative.Constants.BACKGROUND_COLOR;
+import static com.getwala.quikkly.reactnative.Constants.BORDER_COLOR;
+import static com.getwala.quikkly.reactnative.Constants.DATA_COLOR;
+import static com.getwala.quikkly.reactnative.Constants.IMAGE_PATH;
+import static com.getwala.quikkly.reactnative.Constants.MASK_COLOR;
+import static com.getwala.quikkly.reactnative.Constants.OVERLAY_COLOR;
+import static com.getwala.quikkly.reactnative.Constants.QUIKKLY_DATA_CODE;
+import static com.getwala.quikkly.reactnative.Constants.TEMPLATE_NAME;
 import static com.getwala.quikkly.reactnative.R.id.render_tag;
 
 /**
@@ -114,7 +115,6 @@ public class GenerateQuikklyCodeActivity extends AppCompatActivity {
         }
 
         renderView.setAll(templateName, data, skin);
-        renderView.setData(data);
 
     }
 
@@ -135,6 +135,17 @@ public class GenerateQuikklyCodeActivity extends AppCompatActivity {
         } finally {
             stream.close();
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Rect renderViewSize = new Rect();
+        renderView.getDrawingRect(renderViewSize);
+
+        if(!renderViewSize.contains((int)event.getX() , (int)event.getY())){
+            finish();
+        }
+        return true;
     }
 }
 
