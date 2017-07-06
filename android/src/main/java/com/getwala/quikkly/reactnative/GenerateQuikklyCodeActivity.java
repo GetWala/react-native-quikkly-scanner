@@ -139,12 +139,7 @@ public class GenerateQuikklyCodeActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Rect renderViewSize = new Rect();
-        renderView.getDrawingRect(renderViewSize);
-
-        if(!renderViewSize.contains((int)event.getX() , (int)event.getY())){
-            finish();
-        }
+        finish();
         return true;
     }
 }
