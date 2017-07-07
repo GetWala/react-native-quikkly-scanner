@@ -20,22 +20,20 @@ import static com.getwala.quikkly.reactnative.Constants.QUIKKLY_SCANNED_CODE;
 public class ScanQuikklyCodeActivity extends ScanActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState){
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.quikkly_scan_activity);
         Quikkly.getDefaultInstance();
     }
 
     @Override
-    public void onScanResult(@Nullable ScanResult result){
-        if(result != null && result.isEmpty() == false) {
-            for(Tag scannedCode : result.tags) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra(QUIKKLY_SCANNED_CODE, scannedCode.getData().toString());
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
-            }
+    public void onScanResult(@Nullable ScanResult result) {
+        if (result != null && result.isEmpty() == false) {
+            Tag scannedCode = result.tags[0];
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra(QUIKKLY_SCANNED_CODE, scannedCode.getData().toString());
+            setResult(Activity.RESULT_OK, resultIntent);
+            finish();
         }
-
     }
 }
